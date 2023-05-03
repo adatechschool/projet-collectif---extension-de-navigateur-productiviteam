@@ -1,0 +1,24 @@
+body {
+  background-color: pink;
+}
+
+.main-container {
+  max-width: 500px;
+  border: 1px black solid;
+}
+
+
+.container-icons {
+  display: flex;
+  justify-content: space-evenly;
+  padding: 0;
+  margin: 0 auto;
+}
+
+li {
+  list-style-type: none;
+  border: 1px solid transparent;
+  padding: 20px;
+  border-radius: 50%;
+  background: white;
+}
