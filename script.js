@@ -1,8 +1,6 @@
-let playerForest = document.querySelector("#audioForest");
-let playerWaves = document.querySelector("#audioWaves");
-let playerRain = document.querySelector("#audioRain");
-let dernier = ""
-
+let buttonForest = document.querySelector("#buttonForest");
+let buttonWaves = document.querySelector("#buttonWaves");
+let buttonRain = document.querySelector("#buttonRain");
 
 let buttonSvg = {
     "buttonForest": `<svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -38,6 +36,7 @@ const stopMusic = () => {
     })
 }
 
+
 const play = (idPlayer, control) => {
     let player = document.querySelector("#" + idPlayer);
     let buttonId = control.id;
@@ -71,3 +70,7 @@ const play = (idPlayer, control) => {
         //control.textContent = 'Play';
   }
 }
+
+buttonForest.addEventListener("click", play("audioForest", "buttonForest"));
+buttonWaves.addEventListener("click", play("audioWaves", this));
+buttonRain.addEventListener("click", play("audioRain", this));
