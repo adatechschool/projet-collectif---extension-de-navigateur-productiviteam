@@ -13,11 +13,11 @@ body {
   margin: 0 auto;
 }
 
-li {
+.list-song {
   list-style-type: none;
 }
 
-button {
+.button-song {
   border: 1px solid transparent;
   padding: 20px;
   border-radius: 50%;

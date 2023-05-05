@@ -1,3 +1,4 @@
+////// Partie AUDIO
 let buttonForest = document.querySelector("#buttonForest");
 let buttonWaves = document.querySelector("#buttonWaves");
 let buttonRain = document.querySelector("#buttonRain");
@@ -29,13 +30,12 @@ const stopMusic = () => {
             audio.pause();
         }
     });
-    let allPlayerButtons = document.querySelectorAll("button");
+    let allPlayerButtons = document.querySelectorAll(".button-song");
     allPlayerButtons.forEach(function(button) {
         let buttonId = button.id;
         button.innerHTML = buttonSvg[buttonId];
     })
 }
-
 
 const play = (idPlayer, idButton) => {
     let player = document.querySelector("#" + idPlayer);
@@ -74,3 +74,24 @@ const play = (idPlayer, idButton) => {
 buttonForest.addEventListener("click", () => { play("audioForest", "buttonForest") });
 buttonWaves.addEventListener("click",  () => { play("audioWaves", "buttonWaves")});
 buttonRain.addEventListener("click",  () => { play("audioRain", "buttonRain")});
+
+
+
+////// Partie TO DO LIST
+let buttonAddTask = document.getElementById("buttonAdd");
+let taskList = document.getElementById("myTaskList");
+
+const newElement = () => {
+  let li = document.createElement("li");
+  let taskInputValue = document.getElementById("taskInput").value;
+  let t = document.createTextNode(taskInputValue);
+  li.appendChild(t);
+  if (taskInputValue === "") {
+    console.log("You must write something before adding a task !")
+  } else {
+    taskList.appendChild(li);
+  }
+  document.getElementById("taskInput").value = "";
+}
+
+buttonAddTask.addEventListener("click", () => { newElement() });
