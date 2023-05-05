@@ -83,9 +83,13 @@ let taskList = document.getElementById("myTaskList");
 
 const newElement = () => {
   let li = document.createElement("li");
+  let checkbox = document.createElement("input")
+  checkbox.type = "checkbox"
+  li.appendChild(checkbox)
   let taskInputValue = document.getElementById("taskInput").value;
   let t = document.createTextNode(taskInputValue);
   li.appendChild(t);
+
   if (taskInputValue === "") {
     console.log("You must write something before adding a task !")
   } else {
