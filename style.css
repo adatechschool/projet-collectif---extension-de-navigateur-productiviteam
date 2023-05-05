@@ -23,3 +23,7 @@ body {
   border-radius: 50%;
   background: white;
 }
+
+li {
+  list-style-type: none;
+}
