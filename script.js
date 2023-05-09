@@ -1,4 +1,4 @@
-////// Partie AUDIO
+// Partie AUDIO
 let buttonForest = document.querySelector("#buttonForest");
 let buttonWaves = document.querySelector("#buttonWaves");
 let buttonRain = document.querySelector("#buttonRain");
@@ -75,25 +75,51 @@ buttonForest.addEventListener("click", () => { play("audioForest", "buttonForest
 buttonWaves.addEventListener("click",  () => { play("audioWaves", "buttonWaves")});
 buttonRain.addEventListener("click",  () => { play("audioRain", "buttonRain")});
 
-
-
-////// Partie TO DO LIST
+// Partie TO DO LIST
 let buttonAddTask = document.getElementById("buttonAdd");
 let taskList = document.getElementById("myTaskList");
 
+// Renvoie un tableau contenant l'intitulé des tâches (sauvegardées dans le localStorage)
+const getToDoList = () => {
+  let list = localStorage.getItem("listStorage");
+  if (list !== null){
+    return JSON.parse(list);
+  }
+  else {
+    return [];
+  }
+}
+// Enregistre le tableau avec la nouvelle tâche (tableau "toDoList") dans le localStorage 
+const saveToDoList = (toDoList) => {
+  localStorage.setItem("listStorage", JSON.stringify(toDoList));
+}
+// Génère dans la page HTML la to do list à partir de celle sauvegardée dans le localStorage
+const generateToDoList = () => {
+  taskList.innerHTML = "";
+  let taskNames = getToDoList();
+  taskNames.forEach(task => {
+    let li = document.createElement("li");
+    let checkbox = document.createElement("input")
+    checkbox.type = "checkbox"
+    li.appendChild(checkbox)
+    let t = document.createTextNode(task);
+    li.appendChild(t);
+    taskList.appendChild(li);
+  })
+}
+
+window.onload = generateToDoList;
+
 const newElement = () => {
-  let li = document.createElement("li");
-  let checkbox = document.createElement("input")
-  checkbox.type = "checkbox"
-  li.appendChild(checkbox)
   let taskInputValue = document.getElementById("taskInput").value;
-  let t = document.createTextNode(taskInputValue);
-  li.appendChild(t);
 
   if (taskInputValue === "") {
     console.log("You must write something before adding a task !")
   } else {
-    taskList.appendChild(li);
+    let toDoList = getToDoList(); // tableau issu du local storage
+    toDoList.push(taskInputValue);
+    saveToDoList(toDoList); // met la nouvelle todoList dans le local storage
+    generateToDoList(); // régénère la todoList
   }
   document.getElementById("taskInput").value = "";
 }
