@@ -71,9 +71,21 @@ const play = (idPlayer, idButton) => {
 
 //addEventListener nécessaire pour l'extension chrome car "onclick" via html ne fonctionne pas 
 //Pour utiliser des arguments dans une fonction appelé au clic, le formalisme suivant est nécessaire :
-buttonForest.addEventListener("click", () => { play("audioForest", "buttonForest") });
-buttonWaves.addEventListener("click",  () => { play("audioWaves", "buttonWaves")});
-buttonRain.addEventListener("click",  () => { play("audioRain", "buttonRain")});
+// buttonForest.addEventListener("click", () => { play("audioForest", "buttonForest") });
+// buttonWaves.addEventListener("click",  () => { play("audioWaves", "buttonWaves")});
+// buttonRain.addEventListener("click",  () => { play("audioRain", "buttonRain")});
+// TESTS POUR LE BACKGROUND
+buttonForest.addEventListener("click", function () {
+  console.log("Je clique")
+  chrome.runtime.sendMessage({name: "sw-playTrack", idPlayer: "audioForest"})
+})
+buttonWaves.addEventListener("click", function () {
+  chrome.runtime.sendMessage({name: "sw-playTrack", idPlayer: "audioWaves"})
+})
+buttonRain.addEventListener("click", function () {
+  chrome.runtime.sendMessage({name: "sw-playTrack", idPlayer: "audioRain"})
+})
+
 
 // Partie TO DO LIST
 let buttonAddTask = document.getElementById("buttonAdd");

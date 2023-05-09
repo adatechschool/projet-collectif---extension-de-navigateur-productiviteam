@@ -12,5 +12,9 @@
   "action": {
     "default_popup": "index.html",
     "default_title": "Time to work"
-  }
+  },
+  "background": {
+    "service_worker": "serviceWorker.js"
+  },
+  "permissions": ["offscreen"]
 }
