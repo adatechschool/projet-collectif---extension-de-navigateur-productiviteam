@@ -18,6 +18,7 @@ chrome.runtime.onMessage.addListener((msg, sender, response) => {
             chrome.runtime.sendMessage({name: "displayPause", idButton: msg.idButton})
         } else {
             audioElement.pause();
+            chrome.runtime.sendMessage({name: "displayPause", idButton: ""})
         }
     }
 })

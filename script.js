@@ -83,22 +83,12 @@ const displayAllButtonsOff = () => {
     })
 }
 
-buttonForest.addEventListener("click", async function () {
-  chrome.runtime.sendMessage({name: "sw-playTrack", idPlayer: "audioForest", idButton: "buttonForest"});
+const displayButtons = () => {
   displayAllButtonsOff();
-})
-buttonWaves.addEventListener("click", function () {
-  chrome.runtime.sendMessage({name: "sw-playTrack", idPlayer: "audioWaves", idButton: "buttonWaves"});
-  displayAllButtonsOff();
-})
-buttonRain.addEventListener("click", function () {
-  chrome.runtime.sendMessage({name: "sw-playTrack", idPlayer: "audioRain", idButton: "buttonRain"});
-  displayAllButtonsOff();
-})
-
-chrome.runtime.onMessage.addListener((msg, sender, response) => {
-  if (msg.name === "displayPause") {
-    let control = document.getElementById(msg.idButton)
+  let idButtonPause = localStorage.getItem("idButtonAudioPlaying");
+  console.log("idButtonPause issu du localStorage", idButtonPause)
+  if (idButtonPause !== null && idButtonPause !== "") {
+    let control = document.getElementById(idButtonPause)
     control.innerHTML = `<svg fill="#000000" height="40px" width="40px" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" 
         viewBox="0 0 189.993 189.993" xml:space="preserve">
         <path d="M94.997,189.993C42.615,189.993,0,147.378,0,94.997C0,42.615,42.615,0,94.997,0c52.381,0,94.996,42.615,94.996,94.997
@@ -117,6 +107,30 @@ chrome.runtime.onMessage.addListener((msg, sender, response) => {
         c-3.815,0-6.918,3.104-6.918,6.918v65.164c0,3.814,3.104,6.918,6.918,6.918h14.664c3.814,0,6.918-3.104,6.918-6.918V59.558
         c0-3.814-3.104-6.918-6.918-6.918H65.488z"/>
         </svg>`
+  }
+}
+
+//on ne peut pas utiliser window.onload car deja utilise plus bas ?
+displayButtons();
+
+buttonForest.addEventListener("click", async function () {
+  chrome.runtime.sendMessage({name: "sw-playTrack", idPlayer: "audioForest", idButton: "buttonForest"});
+  // displayAllButtonsOff();
+})
+buttonWaves.addEventListener("click", function () {
+  chrome.runtime.sendMessage({name: "sw-playTrack", idPlayer: "audioWaves", idButton: "buttonWaves"});
+  // displayAllButtonsOff();
+})
+buttonRain.addEventListener("click", function () {
+  chrome.runtime.sendMessage({name: "sw-playTrack", idPlayer: "audioRain", idButton: "buttonRain"});
+  // displayAllButtonsOff();
+})
+
+chrome.runtime.onMessage.addListener((msg, sender, response) => {
+  if (msg.name === "displayPause") {
+    console.log("msg.idButton dans script", msg.idButton)
+    localStorage.setItem("idButtonAudioPlaying", msg.idButton)
+    displayButtons();
   }
 })
 
