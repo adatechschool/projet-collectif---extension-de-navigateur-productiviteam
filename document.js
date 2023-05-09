@@ -15,6 +15,7 @@ chrome.runtime.onMessage.addListener((msg, sender, response) => {
         if (audioElement.paused) {
             stopMusicBG();
             audioElement.play();
+            chrome.runtime.sendMessage({name: "displayPause", idButton: msg.idButton})
         } else {
             audioElement.pause();
         }

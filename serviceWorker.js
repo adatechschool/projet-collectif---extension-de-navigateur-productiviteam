@@ -12,7 +12,7 @@
 //   }
 
 async function createOffScreen() {
-    console.log("Passe dans createOffScreen")
+    // console.log("Passe dans createOffScreen")
     if (await chrome.offscreen.hasDocument()) return;
     // const offscreenDocumentPath = 'offscreen.html'
     // if (await hasOffscreenDocument(offscreenDocumentPath)) return;
@@ -29,7 +29,7 @@ async function createOffScreen() {
 chrome.runtime.onMessage.addListener(async (msg, sender, response) => {
     await createOffScreen();
     if (msg.name === "sw-playTrack") {
-        chrome.runtime.sendMessage({name: "playTrack", idPlayer: msg.idPlayer});
+        chrome.runtime.sendMessage({name: "playTrack", idPlayer: msg.idPlayer, idButton: msg.idButton});
     }
 
 })
