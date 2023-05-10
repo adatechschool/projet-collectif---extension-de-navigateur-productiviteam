@@ -183,7 +183,11 @@ const newElement = () => {
 buttonAddTask.addEventListener("click", () => { newElement() });
 
 // GESTION OUVERTURE ET FERMETURE DE L'EXTENSION
-const windowOnLoad = () => {
+const windowOnLoad = async () => {
+  let audioIsPlaying = await chrome.runtime.sendMessage({name: "isPlaying"})
+  if (!audioIsPlaying) {
+    localStorage.removeItem("idButtonAudioPlaying")
+  }
   displayButtons();
   generateToDoList();
 }
