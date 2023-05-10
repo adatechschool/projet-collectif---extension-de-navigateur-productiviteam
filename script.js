@@ -135,6 +135,7 @@ chrome.runtime.onMessage.addListener((msg, sender, response) => {
 let buttonAddTask = document.getElementById("buttonAdd");
 let taskList = document.getElementById("myTaskList");
 
+
 // Renvoie un tableau contenant l'intitulé des tâches (sauvegardées dans le localStorage)
 const getToDoList = () => {
   let list = localStorage.getItem("listStorage");
@@ -145,26 +146,39 @@ const getToDoList = () => {
     return [];
   }
 }
+
 // Enregistre le tableau avec la nouvelle tâche (tableau "toDoList") dans le localStorage 
 const saveToDoList = (toDoList) => {
   localStorage.setItem("listStorage", JSON.stringify(toDoList));
 }
+
+const saveCurrentList = () => {
+  let tasks = document.querySelectorAll(".task")
+  let toDoList = []
+  tasks.forEach(task => {
+    let taskName = task.innerText;
+    let isChecked = task.querySelector("input").checked; //"checked" est true ou false en fonction de si la checkbox est cochee ou pas
+    let taskToAdd = {name: taskName, checked: isChecked};
+    toDoList.push(taskToAdd);
+  })
+  saveToDoList(toDoList);
+}
 // Génère dans la page HTML la to do list à partir de celle sauvegardée dans le localStorage
 const generateToDoList = () => {
   taskList.innerHTML = "";
-  let taskNames = getToDoList();
-  taskNames.forEach(task => {
+  let tasks = getToDoList();
+  tasks.forEach(task => {
     let li = document.createElement("li");
+    li.classList.add("task");
     let checkbox = document.createElement("input")
     checkbox.type = "checkbox"
+    checkbox.checked = task.checked;
     li.appendChild(checkbox)
-    let t = document.createTextNode(task);
+    let t = document.createTextNode(task.name);
     li.appendChild(t);
     taskList.appendChild(li);
   })
 }
-
-// window.onload = generateToDoList;
 
 const newElement = () => {
   let taskInputValue = document.getElementById("taskInput").value;
@@ -172,8 +186,10 @@ const newElement = () => {
   if (taskInputValue === "") {
     console.log("You must write something before adding a task !")
   } else {
+    saveCurrentList();
     let toDoList = getToDoList(); // tableau issu du local storage
-    toDoList.push(taskInputValue);
+    let newTask = {name: taskInputValue, checked: false};
+    toDoList.push(newTask);
     saveToDoList(toDoList); // met la nouvelle todoList dans le local storage
     generateToDoList(); // régénère la todoList
   }
@@ -181,6 +197,7 @@ const newElement = () => {
 }
 
 buttonAddTask.addEventListener("click", () => { newElement() });
+
 
 // GESTION OUVERTURE ET FERMETURE DE L'EXTENSION
 const windowOnLoad = async () => {
@@ -193,3 +210,4 @@ const windowOnLoad = async () => {
 }
 
 window.onload = windowOnLoad;
+window.onunload = saveCurrentList;
