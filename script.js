@@ -110,9 +110,6 @@ const displayButtons = () => {
   }
 }
 
-//on ne peut pas utiliser window.onload car deja utilise plus bas ?
-displayButtons();
-
 buttonForest.addEventListener("click", async function () {
   chrome.runtime.sendMessage({name: "sw-playTrack", idPlayer: "audioForest", idButton: "buttonForest"});
   // displayAllButtonsOff();
@@ -167,7 +164,7 @@ const generateToDoList = () => {
   })
 }
 
-window.onload = generateToDoList;
+// window.onload = generateToDoList;
 
 const newElement = () => {
   let taskInputValue = document.getElementById("taskInput").value;
@@ -184,3 +181,11 @@ const newElement = () => {
 }
 
 buttonAddTask.addEventListener("click", () => { newElement() });
+
+// GESTION OUVERTURE ET FERMETURE DE L'EXTENSION
+const windowOnLoad = () => {
+  displayButtons();
+  generateToDoList();
+}
+
+window.onload = windowOnLoad;
