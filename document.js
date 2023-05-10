@@ -9,7 +9,7 @@ const stopMusicBG = () => {
 }
 
 // Listen for messages
-chrome.runtime.onMessage.addListener((msg, sender, response) => {
+chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
     if (msg.name === "playTrack"){
         let audioElement = document.getElementById(msg.idPlayer);
         if (audioElement.paused) {
@@ -20,5 +20,16 @@ chrome.runtime.onMessage.addListener((msg, sender, response) => {
             audioElement.pause();
             chrome.runtime.sendMessage({name: "displayPause", idButton: ""})
         }
+    }
+
+    if (msg.name === "isPlaying"){
+        let response = false;
+        let allAudios = document.querySelectorAll("audio");
+        allAudios.forEach(function (audio) {
+            if (audio.duration > 0 && !audio.paused) {
+                response = true;
+            }
+        })
+        sendResponse(response);
     }
 })
