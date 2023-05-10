@@ -1,9 +1,16 @@
 body {
-  background-color: pink;
+  background-color: white;
+  max-width: 600px;
+  padding: 5px;
 }
 
 .main-container {
-  max-width: 500px;
+  background-color: pink;
+  width: 350px;
+  height: auto;
+  border-radius: 8px;
+  padding: 10px;
+  box-shadow: rgba(136, 165, 191, 0.48) 6px 2px 16px 0px, rgba(255, 255, 255, 0.8) -6px -2px 16px 0px;
 }
 
 .container-icons {
@@ -18,10 +25,24 @@ body {
 }
 
 .button-song {
-  border: 1px solid transparent;
-  padding: 20px;
+  border: 2px solid #ef6eae;
+  width: 60px;
+  height: 60px;
   border-radius: 50%;
   background: white;
+  transition: 0.25s;
+}
+
+
+.button-song:hover,
+.button-song:focus {
+  border: 1px solid white;
+  background: pink;
+}
+
+svg {
+  width: 35px;
+  height: 35px;
 }
 
 li {
