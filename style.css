@@ -48,3 +48,7 @@ svg {
 li {
   list-style-type: none;
 }
+
+li:has(> input[type="checkbox"]:checked) {
+  text-decoration-line: line-through;
+}
