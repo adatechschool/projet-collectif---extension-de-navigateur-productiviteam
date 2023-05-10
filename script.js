@@ -198,6 +198,24 @@ const newElement = () => {
 
 buttonAddTask.addEventListener("click", () => { newElement() });
 
+let buttonClear = document.getElementById("buttonClear");
+
+const effacer = () => {
+  saveCurrentList();
+  let currentToDoList = getToDoList();
+  let newToDoList = [];
+  
+  currentToDoList.forEach(task => {
+    if (task.checked === false){
+      newToDoList.push(task)
+    }
+  })
+  saveToDoList(newToDoList);
+  generateToDoList();
+}
+
+buttonClear.addEventListener("click", () => {effacer()});
+
 
 // GESTION OUVERTURE ET FERMETURE DE L'EXTENSION
 const windowOnLoad = async () => {
