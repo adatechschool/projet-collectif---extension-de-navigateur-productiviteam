@@ -4,13 +4,16 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
   <title>Our extension</title>
 </head>
 <body>
   <div class="main-container">
     <h1>Working chill with music</h1>
-    <div>
+    <div class="container-song">
       <!-- <audio id="audioForest" src="audios/forest1.mp3"></audio>
       <audio id="audioWaves" src="audios/waves1.mp3"></audio>
       <audio id="audioRain" src="audios/rain1.mp3"></audio> -->
@@ -46,10 +49,12 @@
       </ul>
     </div>
     <div>
-      <h2>My to do list</h2>
-      <input class="search-input" type="text" id="taskInput" placeholder="my task..."/>
-      <button id="buttonAdd">Add task</button>
-      <button id="buttonClear">Delete</button>
+      <h2>To do list</h2>
+      <div class="add-area-task">
+        <input class="add-area-input" type="text" id="taskInput" placeholder="my task..."/>
+        <button id="buttonAdd">Add</button>
+        <button id="buttonClear"></button>
+      </div>
       <ul id="myTaskList">
       </ul>
     </div>
