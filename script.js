@@ -198,6 +198,12 @@ const newElement = () => {
 
 buttonAddTask.addEventListener("click", () => { newElement() });
 
+document.getElementById("taskInput").addEventListener("keypress", (event) => {
+  if (event.key === "Enter") {
+    newElement();
+  }
+})
+
 let buttonClear = document.getElementById("buttonClear");
 
 const effacer = () => {
